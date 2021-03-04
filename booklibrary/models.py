@@ -15,7 +15,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     name = models.CharField(max_length=100)
-    author = models.ManyToManyField(Author, on_delete=models.SET_NULL, null=True)
+    author = models.ManyToManyField(Author)
 
 
 class LibraryUser(models.Model):
