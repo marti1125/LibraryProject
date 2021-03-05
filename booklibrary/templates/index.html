@@ -1,0 +1,50 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col ms-auto"><h1>Bibliteca</h1></div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"><p></p></div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Authors</h5>
+                <p class="card-text"></p>
+                <a href="/authors" class="btn btn-primary">Manage Authors</a>
+              </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Books</h5>
+                <p class="card-text"></p>
+                <a href="/books" class="btn btn-primary">Manage Books</a>
+              </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Users</h5>
+                <p class="card-text"></p>
+                <a href="/users" class="btn btn-primary">Manage Users</a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col ms-auto">
+            <h1>Autores</h1>
+            <a class="btn btn-primary" href="/authors/add" role="button">Agregar Autor</a>
+            <br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col ms-auto">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellido</th>
+                  <th scope="col">Fecha de nacimiento</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for author in authors %}
+                <tr>
+                  <th scope="row">{{ author.id }}</th>
+                  <td>{{ author.first_name }}</td>
+                  <td>{{ author.last_name }}</td>
+                  <td>{{ author.birth_date }}</td>
+                  <td>
+                      <a class="btn btn-primary" href="/authors/{{ author.id }}"><i class="bi bi-pencil"></i> Editar</a>
+                      <a class="btn btn-primary" href="/authors/{{ author.id }}/delete"><i class="bi bi-eraser"></i> Eliminar</a>
+                  </td>
+                  <td></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

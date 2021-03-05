@@ -8,6 +8,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100)
     birth_date = models.DateField()
     active = models.BooleanField(default=True)
+    books = models.ManyToManyField('Book', through='Authored')
 
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
@@ -15,7 +16,15 @@ class Author(models.Model):
 
 class Book(models.Model):
     name = models.CharField(max_length=100)
-    author = models.ManyToManyField(Author)
+    authors = models.ManyToManyField('Author', through='Authored')
+
+    def __str__(self):
+        return "%s %s %s" % (self.name, self.author.first_name, self.author.last_name)
+
+
+class Authored(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
+    book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True)
 
 
 class LibraryUser(models.Model):

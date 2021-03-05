@@ -19,5 +19,13 @@ from booklibrary import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.author_view),
+    path('', views.IndexView.as_view(), name='index'),
+    path('authors', views.AuthorIndex.as_view(), name='author_index'),
+    path('authors/add', views.AuthorCreate.as_view(), name='author_create'),
+    path('authors/<int:pk>', views.AuthorUpdate.as_view(), name='author_update'),
+    path('authors/<int:pk>/delete', views.AuthorDelete.as_view(), name='author_delete'),
+    path('books', views.BookIndex.as_view(), name='book_index'),
+    path('books/add', views.BookCreate.as_view(), name='book_create'),
+    path('books/<int:pk>', views.BookUpdate.as_view(), name='book_update'),
+    path('books/<int:pk>/delete', views.BookDelete.as_view(), name='book_delete'),
 ]

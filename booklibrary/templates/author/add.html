@@ -1,0 +1,38 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col ms-auto"><h1>Autores</h1></div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col ms-auto">
+            <form action="/authors/add" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Nombres</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                    {{ form.last_name }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Fecha de nacimiento</label>
+                    {{ form.birth_date }}
+                </div>
+
+                <input class="btn btn-primary mb-3" type="submit" value="Guardar">
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+
+
+{% endblock %}
