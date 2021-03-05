@@ -8,15 +8,85 @@
         <div class="col"><p></p></div>
         <div class="col"></div>
     </div>
+
     <div class="row">
         <div class="col ms-auto">
-            <a class="btn btn-primary" href="/lendbook" role="button">Prestar Libro</a>
+            <h1>Prestamos</h1>
+            <a class="btn btn-primary" href="/lendbooks" role="button">Prestar Libro</a>
             <br/>
         </div>
     </div>
     <div class="row">
-        <div class="col"></div>
+        <div class="col"><br/></div>
     </div>
+    <div class="row">
+        <div class="col ms-auto">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Usuario</th>
+                  <th scope="col">Libro</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Hasta que fecha</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for lendbook in lendbooks %}
+                <tr>
+                  <th scope="row">{{ lendbook.id }}</th>
+                  <td>{{ lendbook.library_user }}</td>
+                  <td>{{ lendbook.book }}</td>
+                  <td>{{ lendbook.status }}</td>
+                  <td>{{ lendbook.lend_date }}</td>
+                  <td>
+                      <a class="btn btn-primary" href="/lendbooks/{{ lendbook.id }}"><i class="bi bi-pencil"></i> Editar</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <br/>
+            <h3>Libros Disponibles</h3>
+            <br/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col ms-auto">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Autores</th>
+                  <th scope="col">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for book in books_available %}
+                <tr>
+                  <th scope="row">{{ book.id }}</th>
+                  <td>{{ book.name }}</td>
+                  <td>
+                      {% for author in book.authors.all %}
+                        < {{ author.first_name }} , {{ author.last_name }} >
+                      {% endfor %}
+                  </td>
+                  <td>{{ book.status }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}

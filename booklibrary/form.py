@@ -1,23 +1,11 @@
-from django.forms import ModelForm
+from django import forms
 from . import models
 
 
-class AuthorForm(ModelForm):
+class LendBookForm(forms.ModelForm):
+    book = forms.ModelChoiceField(queryset=models.Book.objects.filter(status='D'))
+
     class Meta:
-        model = models.Author
+        model = models.LendBook
         fields = '__all__'
 
-
-class BookForm(ModelForm):
-    class Meta:
-        model = models.Book
-        fields = '__all__'
-
-    def save(self, commit=True):
-        author_book = super(AuthorForm, self).save(commit=False)
-        author = self.cleaned_data['author']
-
-        if commit:
-            author_book.save()
-
-        return author_book

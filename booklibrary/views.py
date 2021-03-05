@@ -10,6 +10,12 @@ from . import form
 class IndexView(TemplateView):
     template_name = 'index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lendbooks'] = models.LendBook.objects.all()
+        context['books_available'] = models.Book.objects.filter(status='D')
+        return context
+
 
 class AuthorIndex(TemplateView):
     template_name = 'author/index.html'
@@ -125,13 +131,37 @@ class UserDelete(DeleteView):
         return self.post(request, *args, **kwargs)
 
 
-class LendBook(CreateView):
+class LendBookCreate(CreateView):
     template_name = 'lendbook/add.html'
-    model = models.LendBook
-    fields = '__all__'
+    form_class = form.LendBookForm
+    #model = models.LendBook
+    #fields = ['book']
     success_url = reverse_lazy('index')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        print(form.cleaned_data['book'])
+
+        name = form.cleaned_data['book']
+        models.Book.objects.filter(name=name).update(status='N')
+
+        form.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class LendBookUpdate(UpdateView):
+    template_name = 'lendbook/update.html'
+    #form_class = form.LendBookForm
+    model = models.LendBook
+    fields = ['status']
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        #print(self.object.book.name)
+        models.Book.objects.filter(name=self.object.book.name).update(status='D')
+        #lb = models.LendBook.objects.filter(pk=self.object.id)
+        #print(lb)
+
+        form.save()
         return HttpResponseRedirect(self.get_success_url())

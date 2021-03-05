@@ -18,6 +18,7 @@
                   <th scope="col">#</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Autores</th>
+                  <th scope="col">Estado</th>
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
@@ -26,18 +27,16 @@
                 <tr>
                   <th scope="row">{{ book.id }}</th>
                   <td>{{ book.name }}</td>
-
                   <td>
                       {% for author in book.authors.all %}
                         < {{ author.first_name }} , {{ author.last_name }} >
                       {% endfor %}
                   </td>
-
+                  <td>{{ book.status }}</td>
                   <td>
                       <a class="btn btn-primary" href="/books/{{ book.id }}"><i class="bi bi-pencil"></i> Editar</a>
                       <a class="btn btn-primary" href="/books/{{ book.id }}/delete"><i class="bi bi-eraser"></i> Eliminar</a>
                   </td>
-                  <td></td>
                 </tr>
                 {% endfor %}
               </tbody>

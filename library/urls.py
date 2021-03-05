@@ -32,5 +32,6 @@ urlpatterns = [
     path('users/add', views.UserCreate.as_view(), name='user_create'),
     path('users/<int:pk>', views.UserUpdate.as_view(), name='user_update'),
     path('users/<int:pk>/delete', views.UserDelete.as_view(), name='user_delete'),
-    path('lendbook', views.LendBook.as_view(), name='lendbook'),
+    path('lendbooks', views.LendBookCreate.as_view(), name='lendbook_create'),
+    path('lendbooks/<int:pk>', views.LendBookUpdate.as_view(), name='lendbook_update'),
 ]
