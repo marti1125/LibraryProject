@@ -55,7 +55,7 @@ class BookIndex(TemplateView):
 class BookCreate(CreateView):
     template_name = 'book/add.html'
     model = models.Book
-    fields = ['name', 'authors']
+    fields = ['name', 'authors', 'status']
     success_url = reverse_lazy('book_index')
 
     def form_valid(self, form):
@@ -80,7 +80,7 @@ class BookCreate(CreateView):
 class BookUpdate(UpdateView):
     template_name = 'book/update.html'
     model = models.Book
-    fields = ['name', 'authors']
+    fields = ['name', 'authors', 'status']
     success_url = reverse_lazy('book_index')
 
 
@@ -92,3 +92,46 @@ class BookDelete(DeleteView):
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
+
+class UserIndex(TemplateView):
+    template_name = 'user/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users'] = models.LibraryUser.objects.all()
+        return context
+
+
+class UserCreate(CreateView):
+    template_name = 'user/add.html'
+    model = models.LibraryUser
+    fields = '__all__'
+    success_url = reverse_lazy('user_index')
+
+
+class UserUpdate(UpdateView):
+    template_name = 'user/update.html'
+    model = models.LibraryUser
+    fields = '__all__'
+    success_url = reverse_lazy('user_index')
+
+
+class UserDelete(DeleteView):
+    model = models.LibraryUser
+    success_url = reverse_lazy('user_index')
+
+    # return without confirmation template
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+
+class LendBook(CreateView):
+    template_name = 'lendbook/add.html'
+    model = models.LendBook
+    fields = '__all__'
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        print(form.cleaned_data['book'])
+        return HttpResponseRedirect(self.get_success_url())
