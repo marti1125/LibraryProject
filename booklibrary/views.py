@@ -27,15 +27,17 @@ class AuthorIndex(TemplateView):
 
 class AuthorCreate(CreateView):
     template_name = 'author/add.html'
-    model = models.Author
-    fields = ['first_name', 'last_name', 'birth_date']
+    form_class = form.AuthorForm
+    #model = models.Author
+    #fields = ['first_name', 'last_name', 'birth_date']
     success_url = reverse_lazy('author_index')
 
 
 class AuthorUpdate(UpdateView):
     template_name = 'author/update.html'
+    form_class = form.AuthorForm
     model = models.Author
-    fields = ['first_name', 'last_name', 'birth_date']
+    #fields = ['first_name', 'last_name', 'birth_date']
     success_url = reverse_lazy('author_index')
 
 
@@ -59,8 +61,9 @@ class BookIndex(TemplateView):
 
 class BookCreate(CreateView):
     template_name = 'book/add.html'
-    model = models.Book
-    fields = ['name', 'authors', 'status']
+    form_class = form.BookForm
+    #model = models.Book
+    #fields = ['name', 'authors', 'status']
     success_url = reverse_lazy('book_index')
 
     def form_valid(self, form):
@@ -80,8 +83,9 @@ class BookCreate(CreateView):
 
 class BookUpdate(UpdateView):
     template_name = 'book/update.html'
+    form_class = form.BookForm
     model = models.Book
-    fields = ['name', 'authors', 'status']
+    #fields = ['name', 'authors', 'status']
     success_url = reverse_lazy('book_index')
 
 
@@ -105,15 +109,17 @@ class UserIndex(TemplateView):
 
 class UserCreate(CreateView):
     template_name = 'user/add.html'
-    model = models.LibraryUser
-    fields = '__all__'
+    form_class = form.UserForm
+    #model = models.LibraryUser
+    #fields = '__all__'
     success_url = reverse_lazy('user_index')
 
 
 class UserUpdate(UpdateView):
     template_name = 'user/update.html'
+    form_class = form.UserForm
     model = models.LibraryUser
-    fields = '__all__'
+    #fields = '__all__'
     success_url = reverse_lazy('user_index')
 
 
@@ -144,8 +150,9 @@ class LendBookCreate(CreateView):
 
 class LendBookUpdate(UpdateView):
     template_name = 'lendbook/update.html'
+    form_class = form.LendBookUpdateForm
     model = models.LendBook
-    fields = ['status', 'return_date']
+    #fields = ['status', 'return_date']
     success_url = reverse_lazy('index')
 
     def form_valid(self, form):
