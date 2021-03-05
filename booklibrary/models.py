@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from datetime import datetime
 
@@ -62,13 +61,14 @@ def validate_lend(value):
 class LendBook(models.Model):
     STATUS = (
         ('P', 'Prestado'),
-        ('D', 'Disponible'),
+        ('D', 'Devuelto'),
         ('N', 'NoDevuelto'),
     )
     status = models.CharField(max_length=1, choices=STATUS, default='D', verbose_name='Estado')
     library_user = models.ForeignKey(LibraryUser, on_delete=models.SET_NULL, null=True, verbose_name='Usuario')
     book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True, verbose_name='Libro')
-    lend_date = models.DateField(validators=[validate_lend], verbose_name='Fecha de Devolucion')
+    lend_date = models.DateField(validators=[validate_lend], verbose_name='Hasta que fecha')
+    return_date = models.DateField(null=True, blank=True, verbose_name='Fecha de devolucion')
 
     def __str__(self):
         return "%s %s" % (self.library_user.name, self.book.name)

@@ -7,5 +7,5 @@ class LendBookForm(forms.ModelForm):
 
     class Meta:
         model = models.LendBook
-        fields = '__all__'
+        fields = ['status', 'library_user', 'book', 'lend_date']
 
