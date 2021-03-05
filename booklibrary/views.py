@@ -13,6 +13,7 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['lendbooks'] = models.LendBook.objects.all()
         context['books_available'] = models.Book.objects.filter(status='D')
+        context['active_index'] = 'active'
         return context
 
 
@@ -22,6 +23,7 @@ class AuthorIndex(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['authors'] = models.Author.objects.all()
+        context['active_author'] = 'active'
         return context
 
 
@@ -32,6 +34,11 @@ class AuthorCreate(CreateView):
     #fields = ['first_name', 'last_name', 'birth_date']
     success_url = reverse_lazy('author_index')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active_author'] = 'active'
+        return context
+
 
 class AuthorUpdate(UpdateView):
     template_name = 'author/update.html'
@@ -39,6 +46,11 @@ class AuthorUpdate(UpdateView):
     model = models.Author
     #fields = ['first_name', 'last_name', 'birth_date']
     success_url = reverse_lazy('author_index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active_author'] = 'active'
+        return context
 
 
 class AuthorDelete(DeleteView):
@@ -56,6 +68,7 @@ class BookIndex(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['books'] = models.Book.objects.all()
+        context['active_book'] = 'active'
         return context
 
 
@@ -80,6 +93,11 @@ class BookCreate(CreateView):
         print(book.authors.all())
         return HttpResponseRedirect(self.get_success_url())
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active_book'] = 'active'
+        return context
+
 
 class BookUpdate(UpdateView):
     template_name = 'book/update.html'
@@ -87,6 +105,11 @@ class BookUpdate(UpdateView):
     model = models.Book
     #fields = ['name', 'authors', 'status']
     success_url = reverse_lazy('book_index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active_book'] = 'active'
+        return context
 
 
 class BookDelete(DeleteView):
@@ -104,6 +127,7 @@ class UserIndex(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['users'] = models.LibraryUser.objects.all()
+        context['active_user'] = 'active'
         return context
 
 
@@ -114,6 +138,11 @@ class UserCreate(CreateView):
     #fields = '__all__'
     success_url = reverse_lazy('user_index')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active_user'] = 'active'
+        return context
+
 
 class UserUpdate(UpdateView):
     template_name = 'user/update.html'
@@ -121,6 +150,11 @@ class UserUpdate(UpdateView):
     model = models.LibraryUser
     #fields = '__all__'
     success_url = reverse_lazy('user_index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active_user'] = 'active'
+        return context
 
 
 class UserDelete(DeleteView):
@@ -147,6 +181,11 @@ class LendBookCreate(CreateView):
 
         return HttpResponseRedirect(self.get_success_url())
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active_index'] = 'active'
+        return context
+
 
 class LendBookUpdate(UpdateView):
     template_name = 'lendbook/update.html'
@@ -165,3 +204,8 @@ class LendBookUpdate(UpdateView):
 
         form.save()
         return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active_index'] = 'active'
+        return context

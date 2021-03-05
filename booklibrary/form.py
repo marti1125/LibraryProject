@@ -11,7 +11,7 @@ STATUS = (
 class AuthorForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    birth_date = forms.DateTimeField(input_formats=['7%Y-%m-%d'],
+    birth_date = forms.DateTimeField(input_formats=['%Y-%m-%d'],
                                      widget=forms.DateTimeInput(attrs={'class': 'form-control'}, format='%Y-%m-%d'))
 
     class Meta:
@@ -37,7 +37,7 @@ class BookForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    birth_date = forms.DateTimeField(input_formats=['7%Y-%m-%d'],
+    birth_date = forms.DateTimeField(input_formats=['%Y-%m-%d'],
                                      widget=forms.DateTimeInput(attrs={'class': 'form-control'}, format='%Y-%m-%d'))
 
     class Meta:
@@ -51,7 +51,7 @@ class LendBookForm(forms.ModelForm):
                                   widget=forms.Select(attrs={'class': 'form-control'}))
     library_user = forms.ModelChoiceField(queryset=models.LibraryUser.objects.all(),
                                           widget=forms.Select(attrs={'class': 'form-control'}))
-    lend_date = forms.DateTimeField(input_formats=['7%Y-%m-%d'],
+    lend_date = forms.DateTimeField(input_formats=['%Y-%m-%d'],
                                     widget=forms.DateTimeInput(attrs={'class': 'form-control'}, format='%Y-%m-%d'))
 
     class Meta:
@@ -61,7 +61,7 @@ class LendBookForm(forms.ModelForm):
 
 class LendBookUpdateForm(forms.ModelForm):
     status = forms.ChoiceField(choices=STATUS, widget=forms.Select(attrs={'class': 'form-control'}))
-    return_date = forms.DateTimeField(input_formats=['7%Y-%m-%d'],
+    return_date = forms.DateTimeField(input_formats=['%Y-%m-%d'],
                                       widget=forms.DateTimeInput(attrs={'class': 'form-control'}, format='%Y-%m-%d'), required=False)
 
     class Meta:
