@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from datetime import datetime
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -34,13 +35,14 @@ class Authored(models.Model):
 
 
 class LibraryUser(models.Model):
-    first_name = models.CharField(max_length=100, verbose_name='Nombres')
-    last_name = models.CharField(max_length=100, verbose_name='Apellidos')
-    birth_date = models.DateField(verbose_name='Cumpleaños')
-    active = models.BooleanField(default=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    #first_name = models.CharField(max_length=100, verbose_name='Nombres')
+    #last_name = models.CharField(max_length=100, verbose_name='Apellidos')
+    #birth_date = models.DateField(verbose_name='Cumpleaños')
+    #active = models.BooleanField(default=True)
 
     def __str__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return "%s %s (%s)" % (self.user.first_name, self.user.last_name, self.user.username)
 
 
 def validate_lend(value):

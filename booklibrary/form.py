@@ -37,12 +37,24 @@ class BookForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    birth_date = forms.DateTimeField(input_formats=['%Y-%m-%d'],
-                                     widget=forms.DateTimeInput(attrs={'class': 'form-control'}, format='%Y-%m-%d'))
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = models.LibraryUser
-        fields = ['first_name', 'last_name', 'birth_date']
+        fields = ['first_name', 'last_name', 'email', 'username', 'password']
+
+
+class UserUpdateForm(forms.ModelForm):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = models.LibraryUser
+        fields = ['first_name', 'last_name', 'email', 'username']
 
 
 class LendBookForm(forms.ModelForm):
